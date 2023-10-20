@@ -6,18 +6,18 @@ public class MovimientoMapa : MonoBehaviour
     public Tilemap tilemap;
     public float velocidadDesplazamiento = 2f;
     private Vector3 inicioPosicion;
-    private MovimientoPersonaje player;
+    private MovimientoPersonaje jugador;
 
     void Start()
     {
         inicioPosicion = transform.position;
-        player = GameObject.Find("Jugador").GetComponent<MovimientoPersonaje>();
+        jugador = GameObject.Find("Jugador").GetComponent<MovimientoPersonaje>();
 
 
     }
 
     void Update(){
-         if(player.getVivo()){
+         if(jugador.getVivo()){
 
     
         // Calcula la nueva posición del Tilemap
