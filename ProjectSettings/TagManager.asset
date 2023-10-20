@@ -8,6 +8,7 @@ TagManager:
   - Bordes
   - Trigger
   - Jugador
+  - Fondo
   layers:
   - Default
   - TransparentFX
