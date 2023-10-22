@@ -1,5 +1,6 @@
 @echo off
 setlocal
+color 0a
 
 set "SCRIPT_DIR=%~dp0"
 set "REPO_DIR=%SCRIPT_DIR%"
