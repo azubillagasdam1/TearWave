@@ -12,9 +12,10 @@ public class CambioColorEnTrigger : MonoBehaviour
     private float tiempoTransicion = 5;
 
     private void Start()
-    {
-        spriteRenderer = objetoACambiarColor.GetComponent<SpriteRenderer>();
-    }
+{
+    spriteRenderer = objetoACambiarColor.GetComponent<SpriteRenderer>();
+    objetoACambiarColor.SetActive(true); 
+}
 
     private void Update()
     {

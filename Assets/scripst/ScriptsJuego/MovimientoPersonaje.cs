@@ -74,6 +74,23 @@ public class MovimientoPersonaje : MonoBehaviour
             tocandoSuelo = false;
         }
     }
+     private void OnTriggerEnter2D(Collider2D collision)
+    {
+    if (collision.gameObject.CompareTag("Obstaculo"))
+        {
+            // Elimina el personaje si colisiona con el Tilemap
+            Destroy(gameObject);
+            vivo = false;
+        }
+        if (collision.gameObject.CompareTag("Bordes"))
+        {
+            // Elimina el personaje si colisiona con el Tilemap
+            tocandoSuelo = true;
+        } else{
+            tocandoSuelo = false;
+        }
+
+    }
     public bool getVivo(){
         return vivo;
     }
