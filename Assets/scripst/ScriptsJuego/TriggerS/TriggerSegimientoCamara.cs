@@ -5,7 +5,7 @@ public class TriggerSeguirJugador : MonoBehaviour
     private Camera mainCamera;
     private Transform jugador;
     private bool seguir = false; // Variable privada para habilitar o deshabilitar el seguimiento.
-    public ModoSeguimiento modoSeguimiento = ModoSeguimiento.SeguimientoY; // Enum para seleccionar el modo de seguimiento.
+    public ModoSeguimiento modoSeguimiento = ModoSeguimiento.SeguimientoX; // Enum para seleccionar el modo de seguimiento.
 
     private float camX;
     private float camY;
@@ -14,7 +14,9 @@ public class TriggerSeguirJugador : MonoBehaviour
 
     public enum ModoSeguimiento
     {
+        SeguimientoX,
         SeguimientoY,
+        
         SeguimientoXY
     }
 
@@ -39,7 +41,10 @@ public class TriggerSeguirJugador : MonoBehaviour
                 float newX = camX;
                 float newY = camY;
 
-                if (modoSeguimiento == ModoSeguimiento.SeguimientoY)
+               if(modoSeguimiento == ModoSeguimiento.SeguimientoX)
+                {
+                      newX = Mathf.Lerp(camX, jugadorX, Time.deltaTime);
+                } else if (modoSeguimiento == ModoSeguimiento.SeguimientoY)
                 {
                     // Si el modo de seguimiento es "SeguimientoY", centra en el eje Y.
                     newY = Mathf.Lerp(camY, jugadorY, Time.deltaTime);

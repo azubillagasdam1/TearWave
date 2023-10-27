@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class TriggerTerremoto : MonoBehaviour
 {
@@ -11,11 +10,15 @@ public class TriggerTerremoto : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+        if (mainCamera == null)
+        {
+            Debug.LogError("Camera.main no encontrada. Asegúrate de que haya una cámara principal en la escena.");
+        }
     }
 
     private void Update()
     {
-        if (jugadorDentro)
+        if (jugadorDentro && mainCamera != null)
         {
             ShakeCamera();
         }
@@ -37,14 +40,20 @@ public class TriggerTerremoto : MonoBehaviour
         if (collision.CompareTag("Jugador"))
         {
             jugadorDentro = false;
-             mainCamera.transform.position = new Vector3(0, 0, -10);
+            if (mainCamera != null)
+            {
+                mainCamera.transform.position = new Vector3(0, 0, -10);
+            }
         }
     }
 
     private void ShakeCamera()
     {
-        float xOffset = Random.Range(-0.5f, 0.5f) * magnitude;
-        float yOffset = Random.Range(-0.5f, 0.5f) * magnitude;
-        mainCamera.transform.localPosition = new Vector3(xOffset, yOffset, mainCamera.transform.localPosition.z);
+        if (mainCamera != null)
+        {
+            float xOffset = Random.Range(-0.5f, 0.5f) * magnitude;
+            float yOffset = Random.Range(-0.5f, 0.5f) * magnitude;
+            mainCamera.transform.localPosition = new Vector3(xOffset, yOffset, mainCamera.transform.localPosition.z);
+        }
     }
 }

@@ -4,6 +4,8 @@ public class TriggerRotacionCamara : MonoBehaviour
 {
     public float rotationDuration = 2.0f;
     public float rotationSpeed = 180.0f;
+    public bool RotacionPersonalizada = false; // Variable para habilitar la rotación personalizada
+    public float valorPersonalizado = 0f; // Valor de rotación personalizada
 
     private Camera mainCamera;
     private Transform jugador;
@@ -20,13 +22,19 @@ public class TriggerRotacionCamara : MonoBehaviour
         if (isTriggered)
         {
             float angleToRotate = rotationSpeed * Time.deltaTime;
+
+            // Aplicar la rotación personalizada si está habilitada
+            if (RotacionPersonalizada)
+            {
+                angleToRotate = valorPersonalizado;
+            }
+
             mainCamera.transform.Rotate(Vector3.forward, angleToRotate);
             rotationDuration -= Time.deltaTime;
 
             if (rotationDuration <= 0)
             {
                 isTriggered = false;
-             
             }
         }
     }
@@ -37,6 +45,8 @@ public class TriggerRotacionCamara : MonoBehaviour
         if (collision.CompareTag("Jugador"))
         {
             isTriggered = true;
+
+          
         }
     }
 }
