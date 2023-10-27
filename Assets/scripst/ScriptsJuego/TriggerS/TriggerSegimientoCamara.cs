@@ -21,35 +21,39 @@ public class TriggerSeguirJugador : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
-        jugador = GameObject.FindGameObjectWithTag("Jugador").transform;
+        jugador = GameObject.FindGameObjectWithTag("Jugador")?.transform; // Verifica si el jugador es nulo.
     }
 
     private void Update()
     {
         camX = mainCamera.transform.position.x;
         camY = mainCamera.transform.position.y;
-        jugadorX = jugador.position.x;
-        jugadorY = jugador.position.y;
 
-        if (seguir)
+        if (jugador != null) // Verifica si el jugador no es nulo.
         {
-            float newX = camX;
-            float newY = camY;
+            jugadorX = jugador.position.x;
+            jugadorY = jugador.position.y;
 
-            if (modoSeguimiento == ModoSeguimiento.SeguimientoY)
+            if (seguir)
             {
-                // Si el modo de seguimiento es "SeguimientoY", centra en el eje Y.
-                newY = Mathf.Lerp(camY, jugadorY, Time.deltaTime);
-            }
-            else if (modoSeguimiento == ModoSeguimiento.SeguimientoXY)
-            {
-                // Interpola suavemente la posición de la cámara en ambos ejes hacia la del jugador.
-                newX = Mathf.Lerp(camX, jugadorX, Time.deltaTime);
-                newY = Mathf.Lerp(camY, jugadorY, Time.deltaTime);
-            }
+                float newX = camX;
+                float newY = camY;
 
-            // Establece la nueva posición de la cámara.
-            mainCamera.transform.position = new Vector3(newX, newY, mainCamera.transform.position.z);
+                if (modoSeguimiento == ModoSeguimiento.SeguimientoY)
+                {
+                    // Si el modo de seguimiento es "SeguimientoY", centra en el eje Y.
+                    newY = Mathf.Lerp(camY, jugadorY, Time.deltaTime);
+                }
+                else if (modoSeguimiento == ModoSeguimiento.SeguimientoXY)
+                {
+                    // Interpola suavemente la posición de la cámara en ambos ejes hacia la del jugador.
+                    newX = Mathf.Lerp(camX, jugadorX, Time.deltaTime);
+                    newY = Mathf.Lerp(camY, jugadorY, Time.deltaTime);
+                }
+
+                // Establece la nueva posición de la cámara.
+                mainCamera.transform.position = new Vector3(newX, newY, mainCamera.transform.position.z);
+            }
         }
     }
 
@@ -67,7 +71,7 @@ public class TriggerSeguirJugador : MonoBehaviour
         if (collision.CompareTag("Jugador"))
         {
             seguir = false; // Desactiva el seguimiento cuando el jugador sale del trigger.
-                  mainCamera.transform.position = new Vector3(0, 0, -10);
+            mainCamera.transform.position = new Vector3(0, 0, -10);
         }
     }
 }
