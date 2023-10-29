@@ -4,7 +4,7 @@ public class TriggerScript : MonoBehaviour
 {
     public enum Velocidad { MuyLenta, Lenta, Normal, Rapida, UltraRapida }
 
-    public float[] velocidades = { 3f, 5f, 10f, 15f, 20f }; // Valores de fuerza correspondientes a cada velocidad
+    public float[] velocidades = { 3f, 4f, 6f, 10f, 15f }; // Valores de fuerza correspondientes a cada velocidad
 
     public Velocidad velocidad = Velocidad.Normal;
 

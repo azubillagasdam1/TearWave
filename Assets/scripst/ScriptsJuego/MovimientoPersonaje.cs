@@ -32,7 +32,8 @@ public class MovimientoPersonaje : MonoBehaviour
             AplicarFuerzaArriba();
             tocandoSuelo = false;
         }else{
-            AnularFuerzas();
+           
+            AplicarFuerzaAbajo();
         }
     }
     }

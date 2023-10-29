@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class CrearObjetoEnPosicionDelJugador : MonoBehaviour
+public class Estela : MonoBehaviour
 {
     public GameObject jugador; // Debes asignar el objeto "Jugador" en el Inspector
     public GameObject objetoPrefab; // El prefab del objeto que deseas generar
