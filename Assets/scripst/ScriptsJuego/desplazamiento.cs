@@ -24,8 +24,11 @@ public class OscilacionPrensa : MonoBehaviour
 
     void Update()
     {
-        // Mueve la prensa hacia el objetivo de posición
-        transform.position = Vector2.MoveTowards(transform.position, objetivoPosicion, velocidad * Time.deltaTime);
+        if (desplazamiento != Vector2.zero) // Verifica si el desplazamiento no es igual a cero
+        {
+            // Mueve la prensa hacia el objetivo de posición
+            transform.position = Vector2.MoveTowards(transform.position, objetivoPosicion, velocidad * Time.deltaTime);
+        }
 
         // Rota la prensa hacia el objetivo de rotación en Z
         if (InvertirRotación) // Comprueba si se debe invertir la rotación
