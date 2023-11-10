@@ -51,21 +51,24 @@ public class Explosion : MonoBehaviour
 
 
     void CreateExplosion1(GameObject origin)
+{
+    for (int i = 0; i < numberOfObjects; i++)
     {
-        for (int i = 0; i < numberOfObjects; i++)
-        {
-            float angle = i * (360f / numberOfObjects);
-            Vector2 direction = Quaternion.Euler(0, 0, angle) * Vector2.up;
+        float angle = i * (360f / numberOfObjects);
+        Vector2 direction = Quaternion.Euler(0, 0, angle) * Vector2.up;
 
-            GameObject triangular = Instantiate(triangularPrefab, origin.transform.position, Quaternion.identity);
-            Rigidbody2D rb = triangular.GetComponent<Rigidbody2D>();
+        GameObject triangular = Instantiate(triangularPrefab, origin.transform.position, Quaternion.identity);
+        Rigidbody2D rb = triangular.GetComponent<Rigidbody2D>();
 
-            rb.AddForce(direction * explosionForce, ForceMode2D.Impulse);
-            rb.AddTorque(Random.Range(-180f, 180f));
-        }
+        rb.AddForce(direction * explosionForce, ForceMode2D.Impulse);
+        rb.AddTorque(Random.Range(-180f, 180f));
+
+        // Destruye el objeto después de 5 segundos
+        Destroy(triangular, 5.0f);
     }
+}
 
-   void CreateExplosion2(List<GameObject> origins)
+void CreateExplosion2(List<GameObject> origins)
 {
     GameObject jugador = GameObject.FindGameObjectWithTag("Jugador");
     if (jugador != null)
@@ -83,6 +86,9 @@ public class Explosion : MonoBehaviour
 
             rb.AddForce(direction * explosionForce, ForceMode2D.Impulse);
             rb.AddTorque(Random.Range(-180f, 180f));
+
+            // Destruye el objeto después de 5 segundos
+            Destroy(bullet, 5.0f);
         }
     }
 }
@@ -98,9 +104,11 @@ void CreateExplosion3(List<GameObject> origins)
 
         rb.AddForce(Vector2.left * explosionForce, ForceMode2D.Impulse);
         rb.AddTorque(Random.Range(-180f, 180f));
+
+        // Destruye el objeto después de 5 segundos
+        Destroy(bullet, 5.0f);
     }
 }
-
 
 
 
