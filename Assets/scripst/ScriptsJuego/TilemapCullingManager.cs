@@ -1,53 +1,52 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System.Collections.Generic;
 
-public class TilemapCullingManager : MonoBehaviour
+public class TilemapCulling : MonoBehaviour
 {
-    public Camera mainCamera;
-    public float extraPadding = 2.0f;
-    public List<Tilemap> tilemapsToCull;
+    public Tilemap[] tilemaps;
+    private Camera mainCamera;
+    private Vector3 lastCameraPosition;
 
-    private Bounds cameraBounds;
-
-    void Start()
+    private void Awake()
     {
-        cameraBounds = CalculateCameraBounds();
+        mainCamera = Camera.main;
+        lastCameraPosition = mainCamera.transform.position;
     }
 
-    void Update()
+    private void Update()
     {
-        cameraBounds = CalculateCameraBounds();
+        Vector3 cameraPosition = mainCamera.transform.position;
 
-        foreach (Tilemap tilemap in tilemapsToCull)
+        if (cameraPosition != lastCameraPosition)
         {
-            BoundsInt bounds = tilemap.cellBounds;
-            Bounds tilemapBounds = new Bounds(tilemap.GetCellCenterWorld(bounds.min), tilemap.size);
-
-            bool isVisible = cameraBounds.Intersects(tilemapBounds);
-
-            if (isVisible)
+            foreach (Tilemap tilemap in tilemaps)
             {
-                tilemap.gameObject.SetActive(true);
+                BoundsInt boundsInt = tilemap.cellBounds;
+
+                for (int x = boundsInt.xMin; x < boundsInt.xMax; x++)
+                {
+                    for (int y = boundsInt.yMin; y < boundsInt.yMax; y++)
+                    {
+                        Vector3Int currentTilePosition = new Vector3Int(x, y, 0);
+
+                        Vector3Int offset = tilemap.origin - Vector3Int.RoundToInt(cameraPosition);
+                        currentTilePosition += offset;
+
+                        if (tilemap.HasTile(currentTilePosition))
+                        {
+                            tilemap.SetTileFlags(currentTilePosition, TileFlags.None);
+                            tilemap.SetColor(currentTilePosition, Color.white);
+                        }
+                        else
+                        {
+                            tilemap.SetTileFlags(currentTilePosition, TileFlags.LockColor);
+                            tilemap.SetColor(currentTilePosition, Color.clear);
+                        }
+                    }
+                }
             }
-            else
-            {
-                tilemap.gameObject.SetActive(false);
-            }
+
+            lastCameraPosition = cameraPosition;
         }
-    }
-
-    private Bounds CalculateCameraBounds()
-    {
-        Vector3 cameraMin = mainCamera.ViewportToWorldPoint(new Vector3(0, 0));
-        Vector3 cameraMax = mainCamera.ViewportToWorldPoint(new Vector3(1, 1));
-
-        Bounds bounds = new Bounds(mainCamera.transform.position, Vector3.zero);
-        bounds.Encapsulate(cameraMin);
-        bounds.Encapsulate(cameraMax);
-
-        bounds.Expand(extraPadding);
-
-        return bounds;
     }
 }
