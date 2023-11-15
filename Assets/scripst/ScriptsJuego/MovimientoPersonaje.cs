@@ -20,38 +20,46 @@ public class MovimientoPersonaje : MonoBehaviour
         // Si se mantiene presionado el botón izquierdo del mouse
         if (Input.GetMouseButton(0))
         {
-             Debug.Log("Subiendo");
-            AplicarFuerzaArriba();
+            Debug.Log("Subiendo");
+            arriba();
         }
         else
         {
             if (!tocandoSuelo)
             {
                 Debug.Log("Bajando");
-                AplicarFuerzaAbajo();
+                abajo();
             }
             else
             {
-                rb.velocity = new Vector2(rb.velocity.x, 0f);
-                   Debug.Log("Hechado");
-                transform.rotation = Quaternion.Euler(0, 0, 0);
+                Debug.Log("Hechado");
+                hechado();
             }
         }
     }
 
-            
-    void AplicarFuerzaArriba()
+
+    void arriba()
     {
-        rb.velocity = new Vector2(rb.velocity.x, fuerzaArriba);
-        // Cambiar la rotación en el eje Z a 45 grados
+  rb.velocity = new Vector2(rb.velocity.x, fuerzaArriba);
+        // Cambiar la rotación en el eje Z a -45 grados
         transform.rotation = Quaternion.Euler(0, 0, 45);
+         tocandoSuelo = false;
     }
 
-    void AplicarFuerzaAbajo()
+    void abajo()
     {
         rb.velocity = new Vector2(rb.velocity.x, fuerzaAbajo);
         // Cambiar la rotación en el eje Z a -45 grados
         transform.rotation = Quaternion.Euler(0, 0, -45);
+    }
+
+    void hechado()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, fuerzaAbajo);
+
+        // Cambiar la rotación en el eje Z a 0 grados
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -74,7 +82,7 @@ public class MovimientoPersonaje : MonoBehaviour
         if (collision.gameObject.CompareTag("Bordes"))
         {
             // Establecer tocandoSuelo como false cuando ya no detecta colisiones con los bordes
-            tocandoSuelo = false;
+           
         }
     }
 
