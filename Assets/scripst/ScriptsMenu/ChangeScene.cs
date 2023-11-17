@@ -1,11 +1,23 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class ChangeSceneWhitButton : MonoBehaviour
+public class LoadSceneButton : MonoBehaviour
 {
-    // Nombre de la escena a la que deseas cambiar
-    public void LoadScene(string nombreEscena)
+    public string sceneToLoad;  // Nombre de la escena a cargar
+
+    private void Start()
     {
-        SceneManager.LoadScene(nombreEscena);  
+        Button btn = GetComponent<Button>();
+        if (btn != null)
+        {
+            btn.onClick.AddListener(OnButtonClick);
+        }
+    }
+
+    private void OnButtonClick()
+    {
+        // Cambia a la escena especificada al hacer clic
+        SceneManager.LoadScene(sceneToLoad);
     }
 }
