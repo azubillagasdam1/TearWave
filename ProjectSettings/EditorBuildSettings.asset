@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/cinematicaInicial.unity
     guid: f2e2b9439e672f646806d4e6769dddd4
   - enabled: 1
-    path: Assets/Scenes/Menu Inicio.unity
+    path: Assets/Scenes/MenuInicio.unity
     guid: 31a9c03b7f9f5d442ab5bdc5034d76f2
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity

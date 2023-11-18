@@ -17,25 +17,27 @@ public class MovimientoPersonaje : MonoBehaviour
 
     void Update()
     {
+       
         // Si se mantiene presionado el botón izquierdo del mouse
         if (Input.GetMouseButton(0))
         {
-            Debug.Log("Subiendo");
+            //Debug.Log("Subiendo");
             arriba();
         }
         else
         {
             if (!tocandoSuelo)
             {
-                Debug.Log("Bajando");
+                //Debug.Log("Bajando");
                 abajo();
             }
             else
             {
-                Debug.Log("Hechado");
+                //Debug.Log("Hechado");
                 hechado();
             }
-        }
+        
+    }
     }
 
 
@@ -67,8 +69,8 @@ public class MovimientoPersonaje : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstaculo"))
         {
             // Elimina el personaje si colisiona con el Tilemap
-            Destroy(gameObject);
-            vivo = false;
+             muerte();
+            
         }
         if (collision.gameObject.CompareTag("Bordes"))
         {
@@ -77,6 +79,16 @@ public class MovimientoPersonaje : MonoBehaviour
         }
     }
 
+
+  void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Obstaculo"))
+        {
+             muerte();
+             
+          
+    }
+    }
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bordes"))
@@ -85,9 +97,17 @@ public class MovimientoPersonaje : MonoBehaviour
            
         }
     }
+    private void muerte(){
+        vivo = false;
+          //  Destroy(gameObject);
+    }
 
     public bool getVivo()
     {
         return vivo;
+    }
+      public float getFuerzaAbajo()
+    {
+        return fuerzaAbajo;
     }
 }

@@ -31,8 +31,7 @@ public class TriggerSeguirJugador : MonoBehaviour
         camX = mainCamera.transform.position.x;
         camY = mainCamera.transform.position.y;
 
-        if (jugador != null) // Verifica si el jugador no es nulo.
-        {
+        
             jugadorX = jugador.position.x;
             jugadorY = jugador.position.y;
 
@@ -58,7 +57,7 @@ public class TriggerSeguirJugador : MonoBehaviour
 
                 // Establece la nueva posición de la cámara.
                 mainCamera.transform.position = new Vector3(newX, newY, mainCamera.transform.position.z);
-            }
+            
         }
     }
 
