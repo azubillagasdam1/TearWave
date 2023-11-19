@@ -2358,7 +2358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: menuCarga
-  nivelACargar: 
+  nivelACargar: Nivel1
 --- !u!1 &775126041
 GameObject:
   m_ObjectHideFlags: 0
@@ -3750,7 +3750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: MenuCarga
-  nivelACargar: 
+  nivelACargar: Nivel2
 --- !u!1 &1679288618
 GameObject:
   m_ObjectHideFlags: 0

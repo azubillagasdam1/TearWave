@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class AutoLoadScene : MonoBehaviour
 {
-    public string sceneToLoad; 
+    private string sceneToLoad; 
      // Nombre de la escena a cargar
     public float loadDelayInSeconds = 5f; 
      // Tiempo de espera en segundos
