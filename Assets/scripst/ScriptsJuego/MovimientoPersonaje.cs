@@ -6,61 +6,57 @@ public class MovimientoPersonaje : MonoBehaviour
     public float fuerzaAbajo = -10f; // Fuerza hacia abajo
     private bool tocandoSuelo = false;
     private Rigidbody2D rb;
-
+    private AudioSource audioSource; // Nuevo atributo para el AudioSource
+      public ParticleSystem particulasMuerte;
     public bool vivo;
+
+    public AudioClip audioMuerte; // Nuevo atributo para el audio de muerte
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         vivo = true;
+
+        // Agrega un AudioSource al objeto
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     void Update()
     {
-       
         // Si se mantiene presionado el botón izquierdo del mouse
         if (Input.GetMouseButton(0))
         {
-            //Debug.Log("Subiendo");
             arriba();
         }
         else
         {
             if (!tocandoSuelo)
             {
-                //Debug.Log("Bajando");
                 abajo();
             }
             else
             {
-                //Debug.Log("Hechado");
                 hechado();
             }
-        
+        }
     }
-    }
-
 
     void arriba()
     {
-  rb.velocity = new Vector2(rb.velocity.x, fuerzaArriba);
-        // Cambiar la rotación en el eje Z a -45 grados
+        rb.velocity = new Vector2(rb.velocity.x, fuerzaArriba);
         transform.rotation = Quaternion.Euler(0, 0, 45);
-         tocandoSuelo = false;
+        tocandoSuelo = false;
     }
 
     void abajo()
     {
         rb.velocity = new Vector2(rb.velocity.x, fuerzaAbajo);
-        // Cambiar la rotación en el eje Z a -45 grados
         transform.rotation = Quaternion.Euler(0, 0, -45);
     }
 
     void hechado()
     {
         rb.velocity = new Vector2(rb.velocity.x, fuerzaAbajo);
-
-        // Cambiar la rotación en el eje Z a 0 grados
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
@@ -68,45 +64,55 @@ public class MovimientoPersonaje : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstaculo"))
         {
-            // Elimina el personaje si colisiona con el Tilemap
-             muerte();
-            
+            muerte();
         }
         if (collision.gameObject.CompareTag("Bordes"))
         {
-            // Establecer tocandoSuelo como false cuando ya no detecta colisiones con los bordes
             tocandoSuelo = true;
         }
     }
 
-
-  void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Obstaculo"))
         {
-             muerte();
-             
-          
+            muerte();
+        }
     }
-    }
+
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bordes"))
         {
             // Establecer tocandoSuelo como false cuando ya no detecta colisiones con los bordes
-           
         }
     }
-    private void muerte(){
-        vivo = false;
-          //  Destroy(gameObject);
+
+    private void muerte()
+    {
+       
+        if(vivo){
+        // Reproducir el audio de muerte si está asignado
+        if (audioMuerte != null)
+        {
+            audioSource.PlayOneShot(audioMuerte);
+        }
+         if (particulasMuerte != null)
+        {
+            Instantiate(particulasMuerte, transform.position, Quaternion.identity);
+        }
+        }
+         vivo = false;
+
+        // Destroy(gameObject);
     }
 
     public bool getVivo()
     {
         return vivo;
     }
-      public float getFuerzaAbajo()
+
+    public float getFuerzaAbajo()
     {
         return fuerzaAbajo;
     }

@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; // Necesario para trabajar con SceneManager
+using UnityEngine.SceneManagement;
 
 public class ControladorMenuMuerte : MonoBehaviour
 {
-    private MovimientoPersonaje movimientoPersonaje; // Asigna el componente MovimientoPersonaje desde el Inspector
-    public GameObject canvas; // Asigna el GameObject del canvas desde el Inspector
+    private MovimientoPersonaje movimientoPersonaje;
+    public GameObject canvas;
+    private CanvasGroup canvasGroup;
+    public float velocidadTransicion = 2f; // Puedes ajustar la velocidad de transición según tus preferencias
 
     void Start()
     {
-        // Busca el GameObject del jugador por nombre
         GameObject jugadorObject = GameObject.Find("Jugador");
 
-        // Asegúrate de que el GameObject del jugador y el componente MovimientoPersonaje existan
         if (jugadorObject != null)
         {
             movimientoPersonaje = jugadorObject.GetComponent<MovimientoPersonaje>();
@@ -22,27 +22,38 @@ public class ControladorMenuMuerte : MonoBehaviour
         {
             Debug.LogError("No se encontró el GameObject del jugador con el nombre 'Jugador'.");
         }
+
+        // Obtén el componente CanvasGroup del canvas
+        canvasGroup = canvas.GetComponent<CanvasGroup>();
+
+        // Asegúrate de que el CanvasGroup no sea nulo
+        if (canvasGroup == null)
+        {
+            Debug.LogError("No se encontró el componente CanvasGroup en el GameObject del canvas.");
+        }
+
+        // Inicializa la opacidad a cero al inicio
+        canvasGroup.alpha = 0f;
     }
 
     void Update()
     {
-        // Verifica si el jugador está vivo llamando al método getVivo
         bool jugadorVivo = movimientoPersonaje.getVivo();
+
+        // Aplica una transición gradual de opacidad
+        float objetivoOpacidad = jugadorVivo ? 0f : 1f;
+        canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, objetivoOpacidad, velocidadTransicion * Time.deltaTime);
 
         // Si el jugador no está vivo, activa el canvas, de lo contrario, desactívalo
         canvas.SetActive(!jugadorVivo);
 
-        // Verifica si se presionó la tecla "R"
         if (Input.GetKeyDown(KeyCode.R))
         {
-            // Cargar la escena específica al presionar "R"
             SceneManager.LoadScene("Nivel1");
         }
 
-        // Verifica si se presionó la tecla "Escape"
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // Cargar la escena específica al presionar "Escape"
             SceneManager.LoadScene("MenuInicio");
         }
     }
