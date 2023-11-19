@@ -3,13 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class AutoLoadScene : MonoBehaviour
 {
-    public string sceneToLoad;  // Nombre de la escena a cargar
-    public float loadDelayInSeconds = 5f;  // Tiempo de espera en segundos
+    public string sceneToLoad; 
+     // Nombre de la escena a cargar
+    public float loadDelayInSeconds = 5f; 
+     // Tiempo de espera en segundos
 
     private void Start()
     {
         // Inicia la corrutina que maneja la carga automática
         StartCoroutine(LoadSceneAfterDelay());
+           sceneToLoad = PlayerPrefs.GetString("NivelACargar");
     }
 
     private System.Collections.IEnumerator LoadSceneAfterDelay()

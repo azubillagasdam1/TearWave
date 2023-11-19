@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class LoadSceneButton : MonoBehaviour
 {
     public string sceneToLoad;  // Nombre de la escena a cargar
+    public string nivelACargar;  // Parámetro que se enviará a la siguiente escena
 
     private void Start()
     {
@@ -17,7 +18,8 @@ public class LoadSceneButton : MonoBehaviour
 
     private void OnButtonClick()
     {
-        // Cambia a la escena especificada al hacer clic
-        SceneManager.LoadScene(sceneToLoad);
+        // Pasa el parámetro a la siguiente escena antes de cargarla
+        SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
+        PlayerPrefs.SetString("NivelACargar", nivelACargar);
     }
 }

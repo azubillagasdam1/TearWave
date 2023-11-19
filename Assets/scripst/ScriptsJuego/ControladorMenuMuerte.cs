@@ -8,7 +8,8 @@ public class ControladorMenuMuerte : MonoBehaviour
     private MovimientoPersonaje movimientoPersonaje;
     public GameObject canvas;
     private CanvasGroup canvasGroup;
-    public float velocidadTransicion = 2f; // Puedes ajustar la velocidad de transición según tus preferencias
+    public float velocidadTransicion = 2f;
+    public string nivelACargar = ""; // Puedes ajustar la velocidad de transición según tus preferencias
 
     void Start()
     {
@@ -49,7 +50,7 @@ public class ControladorMenuMuerte : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene("Nivel1");
+            SceneManager.LoadScene(nivelACargar);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))

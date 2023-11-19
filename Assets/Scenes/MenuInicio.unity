@@ -1225,7 +1225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &473578237
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2358,6 +2358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: menuCarga
+  nivelACargar: 
 --- !u!1 &775126041
 GameObject:
   m_ObjectHideFlags: 0
@@ -2375,7 +2376,7 @@ GameObject:
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &775126042
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2548,51 +2549,6 @@ MonoBehaviour:
   minScaleY: 0.9
   maxScaleY: 1.1
   speed: 0.5
---- !u!1 &858649563
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 858649565}
-  - component: {fileID: 858649564}
-  m_Layer: 0
-  m_Name: SceneControl
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &858649564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858649563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a3dce82dae37ad4b85940cbcccae00a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad: 
---- !u!4 &858649565
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858649563}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 395.7576, y: 154.85776, z: -3.7133207}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1064124011
 GameObject:
   m_ObjectHideFlags: 0
@@ -3537,6 +3493,7 @@ GameObject:
   - component: {fileID: 1618333815}
   - component: {fileID: 1618333818}
   - component: {fileID: 1618333819}
+  - component: {fileID: 1618333820}
   m_Layer: 5
   m_Name: BotonNivel2
   m_TagString: Untagged
@@ -3683,7 +3640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0456c6808a7674ab45fa15cd11dd1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desbloqueado: 0
+  desbloqueado: 1
 --- !u!82 &1618333819
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3780,6 +3737,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1618333820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618333813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a3dce82dae37ad4b85940cbcccae00a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: MenuCarga
+  nivelACargar: 
 --- !u!1 &1679288618
 GameObject:
   m_ObjectHideFlags: 0
@@ -5391,4 +5362,3 @@ SceneRoots:
   - {fileID: 155987248}
   - {fileID: 1808311266}
   - {fileID: 2100329785}
-  - {fileID: 858649565}
